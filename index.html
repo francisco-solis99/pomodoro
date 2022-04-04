@@ -5,9 +5,28 @@
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite App</title>
+    <link rel="stylesheet" href="./style.css">
   </head>
   <body>
-    <div id="app"></div>
+    <main class="main">
+      <h1 class="pomodoro__title">Pomodoro</h1>
+      <div class="app">
+        <div class="pomodoro__counter-wrapper">
+          <p class="pomodoro__timer">00:00</p>
+          <h2 class="counter__activity"></h2>
+        </div>
+
+        <form action="" class="pomodoro__form">
+          <input type="text" class="pomodoro__task" id="task">
+          <input type="submit" class="pomodoro__add-btn" id="addTask" value="Add Task">
+        </form>
+
+        <footer class="pomodoro__info">
+          <button>Start</button>
+          <div class="pomodoro__tasks"></div>
+        </footer>
+      </div>
+    </main>
     <script type="module" src="/main.js"></script>
   </body>
 </html>

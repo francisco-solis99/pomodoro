@@ -1,8 +1,78 @@
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+
+main {
+  display: grid;
+  place-content: center;
+  min-height: 100vh;
+  background: linear-gradient(-45deg, transparent 10%, #a8dadc 10% 20%, transparent 20% 80%, #a8dadc 80% 90%, transparent 90%);
+  background-color: #e63946 ;
+}
+
+
+.app {
+  min-width: 500px;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.75);
+}
+
+.pomodoro__title {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 3.2rem;
+  color: white;
+}
+
+/* timer */
+.pomodoro__counter-wrapper {
+  margin-bottom: 10px;
+}
+
+.pomodoro__timer {
+  font-size: 2rem;
+}
+
+/* form and inputs */
+.pomodoro__form {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.pomodoro__task {
+  flex: 1;
+  padding: 5px;
+  font-size: 1rem;
+  outline: 0;
+  border: 0;
+}
+
+.pomodoro__add-btn {
+  padding: 10px;
+  /* margin-left: 10px; */
+  border: 0;
+  background-color: #457b9d;
+  color: white;
+  cursor: pointer;
+}
+
+.pomodoro__info {
+  display: flex;
+}
+
+.pomodoro__info button {
+  padding: 10px;
+  border: 0;
+  background-color: #457b9d;
+  color: white;
+  cursor: pointer;
 }
