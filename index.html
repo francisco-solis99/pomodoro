@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="./style.css">
   </head>
   <body>
-    <main class="main">
+    <main class="main" id="main-0">
       <h1 class="pomodoro__title">Pomodoro</h1>
       <div class="app">
         <div class="pomodoro__counter-wrapper">
@@ -17,16 +17,14 @@
         </div>
 
         <form action="" class="pomodoro__form">
-          <input type="text" class="pomodoro__task" id="task">
-          <input type="submit" class="pomodoro__add-btn" id="addTask" value="Add Task">
+          <input type="text" class="pomodoro__task" id="task" required name="title">
+          <input type="submit" class="pomodoro__add-btn" id="addTask" value="Add Task" name="taskbtn">
         </form>
 
-        <footer class="pomodoro__info">
-          <button>Start</button>
-          <div class="pomodoro__tasks"></div>
-        </footer>
+        <section class="pomodoro__task-list">
+        </section>
       </div>
     </main>
-    <script type="module" src="/main.js"></script>
+    <script type="module" src="/main.js" defer></script>
   </body>
 </html>

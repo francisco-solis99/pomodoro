@@ -10,8 +10,12 @@ body {
 
 
 main {
-  display: grid;
-  place-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-width: 340px;
+  width: 100%;
   min-height: 100vh;
   background: linear-gradient(-45deg, transparent 10%, #a8dadc 10% 20%, transparent 20% 80%, #a8dadc 80% 90%, transparent 90%);
   background-color: #e63946 ;
@@ -19,9 +23,12 @@ main {
 
 
 .app {
-  min-width: 500px;
+  width: 75%;
+  max-width: 680px;
+  margin: 0 20px;
+  min-width: 320px;
   text-align: center;
-  padding: 20px;
+  padding: 30px 20px;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.75);
 }
@@ -65,14 +72,40 @@ main {
   cursor: pointer;
 }
 
-.pomodoro__info {
-  display: flex;
+.pomodoro__task-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 20px;
 }
 
-.pomodoro__info button {
+.pomodoro__task-list button {
   padding: 10px;
   border: 0;
   background-color: #457b9d;
   color: white;
   cursor: pointer;
 }
+
+.pomodoro__task-list p {
+  text-align: left;
+  word-break: break-word;
+  margin-left: 10px;
+}
+
+.task__item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.task__completed {
+  text-decoration: line-through;
+}
+
+.btn__disabled {
+  pointer-events: none;
+  opacity: 0.5;
+  background-color: #a1a1a1;
+}
+
+
