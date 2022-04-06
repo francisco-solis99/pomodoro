@@ -1,5 +1,5 @@
-import {Task} from './Task.js'
-import {Pomodoro} from './Pomodoro.js'
+import {Task} from './modules/Task.js'
+import {Pomodoro} from './modules/Pomodoro.js'
 
 // DOM elements
 const inputTask = document.querySelector('.pomodoro__task');
