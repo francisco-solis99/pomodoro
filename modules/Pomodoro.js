@@ -85,6 +85,7 @@ Pomodoro.prototype = {
 
   findTaskHtml(id){
     console.log(this.taskListHtml);
+    console.log(this.tasksList);
     const taskElement = this.taskListHtml.querySelector(`#task-${id}`);
     return taskElement;
   },
