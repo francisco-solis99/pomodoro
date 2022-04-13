@@ -28,16 +28,20 @@ Pomodoro.prototype = {
   addTask(task){
     task.id = this._tasksList.length;
     this._tasksList.push(task);
+    // insert in the DOM
     this.insertTask(task);
+    // save in the local storage
+    this.saveTasks();
   },
 
   insertTask(task){
+    // console.log(task)
+    // console.log(this._tasksList);
     this.taskListHtml.insertAdjacentHTML('beforeend', task.generateHtmlTask());
     // add listener to start the pomodoro activity
     const button = this.taskListHtml.lastElementChild.querySelector('.pomodoro__start-btn');
     button.addEventListener('click', () => this.startTask(task));
-    // save in the local storage
-    this.saveTasks();
+    this.doneTask(task);
   },
 
   get tasksList(){
@@ -59,8 +63,7 @@ Pomodoro.prototype = {
         console.log(secondsLeft)
         if(secondsLeft < 0) {
           clearInterval(this.countdown);
-          task.toggleState();
-          console.log(this._tasksList);
+          this.updateTask(task.id);
           this.titleAct.textContent = '';
           this.doneTask(task);
           return;
@@ -71,7 +74,14 @@ Pomodoro.prototype = {
     console.log('SIGUE AQUI⌛');
   },
 
+  updateTask(id){
+    const task = this._tasksList.find(element => element.id === id);
+    task.completeState = true;
+    this.saveTasks();
+  },
+
   doneTask(task){
+    // console.log(task.title,task.completeState);
     if(!task.completeState) return;
     const divTask = this.findTaskHtml(task.id);
     if(!divTask) return console.error('HTML Task not foundend, check it id');
@@ -80,18 +90,17 @@ Pomodoro.prototype = {
     divTask.querySelector('p').classList.add('task__completed');
     button.classList.add('btn__disabled');
     button.disabled = true;
-    this.saveTasks();
+    // console.table(this._tasksList);
+    // console.table(localStorage.getItem('tasks'));
   },
 
   findTaskHtml(id){
-    console.log(this.taskListHtml);
-    console.log(this.tasksList);
     const taskElement = this.taskListHtml.querySelector(`#task-${id}`);
     return taskElement;
   },
 
   saveTasks(){
-    localStorage.setItem('tasks', JSON.stringify([...this.tasksList]));
+    localStorage.setItem('tasks', JSON.stringify([...this._tasksList]));
   },
 
   displayTime(seconds){
@@ -101,6 +110,5 @@ Pomodoro.prototype = {
     document.title = display;
     this.timerPomodoro.textContent = display;
   }
-
 
 }
