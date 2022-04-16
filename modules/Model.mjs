@@ -2,6 +2,7 @@
 // constructor
 export default function Model(){
   this.activitiesList = JSON.parse(localStorage.getItem('activities')) ?? [];
+  this.onActivitiesChanged = null;
 }
 
 // prototype
@@ -10,7 +11,6 @@ Model.prototype = {
 
   addActivity(title){
     // console.log(this.activitiesList[this.activitiesList.length - 1]);
-    console.log(title);
     const activity = {
       id: this.activitiesList.length ? this.activitiesList[this.activitiesList.length - 1].id + 1 : 0,
       title,
@@ -20,19 +20,27 @@ Model.prototype = {
     this.activitiesList.push(activity);
     console.log(this.activitiesList);
     this.saveActivities();
+
+    this.onActivitiesChanged({...activity}, 'addActivity');
   },
 
-  completedActivitie(id){
+  completedActivity(id){
     const activityIndex = this.findIndexActivity(id);
     this.activitiesList[activityIndex].completed = true;
     this.saveActivities();
+    this.onActivitiesChanged({...this.activitiesList[activityIndex]}, 'completeActivity');
   },
 
   toggleInProgressState(id){
     const activityIndex = this.findIndexActivity(id);
-    console.log(activityIndex);
     this.activitiesList[activityIndex].inProgress = !this.activitiesList[activityIndex].inProgress;
     this.saveActivities();
+    if(this.activitiesList[activityIndex].inProgress){
+      this.onActivitiesChanged({...this.activitiesList[activityIndex]}, 'startPomodoro');
+      return;
+    }
+    this.onActivitiesChanged({...this.activitiesList[activityIndex]}, 'endPomodoro');
+
   },
 
   findIndexActivity(id){
@@ -41,6 +49,10 @@ Model.prototype = {
 
   saveActivities(){
     localStorage.setItem('activities', JSON.stringify([...this.activitiesList]));
+  },
+
+  bindActivitiesList(callback){
+    this.onActivitiesChanged = callback;
   }
 
 }
