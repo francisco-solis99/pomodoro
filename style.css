@@ -31,6 +31,7 @@ main {
   padding: 30px 20px;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.75);
+  box-shadow: -8px 4px 1px 4px rgba(0, 0, 0, 0.25);
 }
 
 .pomodoro__title {
@@ -38,6 +39,7 @@ main {
   text-align: center;
   font-size: 3.2rem;
   color: white;
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.45);
 }
 
 /* timer */
@@ -57,6 +59,7 @@ main {
 
 .pomodoro__input-task {
   flex: 1;
+  /* width: 80%; */
   padding: 5px;
   font-size: 1rem;
   outline: 0;
@@ -65,7 +68,7 @@ main {
 
 .pomodoro__add-btn {
   padding: 10px;
-  /* margin-left: 10px; */
+  min-width: 20%;
   border: 0;
   background-color: #457b9d;
   color: white;
@@ -80,6 +83,8 @@ main {
 
 .pomodoro__task-list button {
   padding: 10px;
+  width: 20%;
+  min-width: 100px;
   border: 0;
   background-color: #457b9d;
   color: white;
@@ -95,7 +100,13 @@ main {
 .pomodoro__task {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 5px;
+  position: relative;
+  transition: all ease-in 300ms;
+}
+
+.pomodoro__task:hover {
+  background-color: rgba(142, 173, 217, 0.35);
 }
 
 /*  dynamic classes using in JS */
@@ -118,4 +129,27 @@ main {
   text-align: center;
   font-size: 1rem;
   font-weight: 500;
+}
+
+.pomodoro__delete-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+.pomodoro__delete-icon::after {
+  content: "\f2ed";
+  display: inline-block;
+  font-weight: 900;
+  font-style: normal;
+  font-variant: normal;
+  font-size: 0.85em;
+  font-family: 'Font Awesome 6 Free';
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+.pomodoro__delete-icon:active {
+  transform: scale(1.1);
 }

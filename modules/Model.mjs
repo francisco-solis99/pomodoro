@@ -9,7 +9,7 @@ export default function Model(){
 Model.prototype = {
   constructor: Model,
 
-  addActivity(title){
+  addActivity(title) {
     // console.log(this.activitiesList[this.activitiesList.length - 1]);
     const activity = {
       id: this.activitiesList.length ? this.activitiesList[this.activitiesList.length - 1].id + 1 : 0,
@@ -24,14 +24,22 @@ Model.prototype = {
     this.onActivitiesChanged({...activity}, 'addActivity');
   },
 
-  completedActivity(id){
+  completedActivity(id) {
     const activityIndex = this.findIndexActivity(id);
     this.activitiesList[activityIndex].completed = true;
     this.saveActivities();
     this.onActivitiesChanged({...this.activitiesList[activityIndex]}, 'completeActivity');
   },
 
-  toggleInProgressState(id){
+  deleteActivity(id) {
+    const activityIndex = this.findIndexActivity(id);
+    const activityCopy = {...this.activitiesList[activityIndex]};
+    this.activitiesList.splice(activityIndex,1);
+    this.saveActivities();
+    this.onActivitiesChanged(activityCopy, 'deleteActivity');
+  },
+
+  toggleInProgressState(id) {
     const activityIndex = this.findIndexActivity(id);
     this.activitiesList[activityIndex].inProgress = !this.activitiesList[activityIndex].inProgress;
     this.saveActivities();

@@ -6,6 +6,7 @@ export default function Controller(model, view){
   // binding the DOM VIew events
   this.view.bindAddActivity(this.handlerActivity.bind(this));
   this.view.bindStartActivity(this.handlerStartPomodoro.bind(this));
+  this.view.bindDeleteActivity(this.handlerDeletePomodoro.bind(this));
 
   // binding pomodoro's activities when changes some property to make changes in UI
   this.model.bindActivitiesList(this.onActivitiesChanged.bind(this));
@@ -31,6 +32,10 @@ Controller.prototype = {
   handlerStartPomodoro: function(idActivitie){
     this.model.toggleInProgressState(idActivitie);
     this.handlerTimer(idActivitie)
+  },
+
+  handlerDeletePomodoro: function(idActivitie) {
+    this.model.deleteActivity(idActivitie);
   },
 
   handlerTimer: async function(idActivitie) {

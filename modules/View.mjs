@@ -28,13 +28,20 @@ View.prototype = {
     })
   },
 
+  bindDeleteActivity(handler){
+    this.activitiesListDOM.addEventListener('click', (e) => {
+      if(!e.target.classList.contains('pomodoro__delete-icon')) return;
+      const activitiyId = Number(e.target.parentNode.id);
+      handler(activitiyId);
+    })
+  },
+
   toggleActivities(){
     const allActivities = document.querySelectorAll('.pomodoro__task > .pomodoro__start-btn');
     console.log(allActivities)
     allActivities.forEach(activityBtn => {
       if(activityBtn.textContent === 'Done') return;
       activityBtn.disabled = !activityBtn.disabled;
-      activityBtn.classList.toggle('btn__disabled');
     });
   },
 
@@ -53,6 +60,7 @@ View.prototype = {
     liItem.innerHTML = `
         <button type="button" class="${classListButton.join(' ')}">${activity.completed ? 'Done' : 'Start'}</button>
         <p class="${classListActivity.join(' ')}">${activity.title}</p>
+        <span class="pomodoro__delete-icon"></span>
     `
     return liItem;
   },
@@ -87,6 +95,7 @@ View.prototype = {
         title.classList.add('task__completed');
         button.textContent = 'Done';
         button.classList.remove('pomodoro__start-btn');
+        button.classList.add('btn__disabled');
         this.timerDisplay.querySelector('h2').textContent = 'Break Time';
       },
       'endPomodoro': () => {
@@ -98,6 +107,17 @@ View.prototype = {
 
         const DOMactivity = this.createActivitie(activity);
         this.activitiesListDOM.appendChild(DOMactivity);
+      },
+      'deleteActivity': () => {
+        const DOMactivity =  this.selectDOMActivity(activity.id);
+        DOMactivity.remove();
+
+        // in case if there are no more activities
+        if(this.activitiesListDOM.querySelector('li')) return;
+        this.activitiesListDOM.innerHTML = `
+        <p class="pomodoro__default-message">Add something to complete in a Pomodoro 😀⌛</p>
+       `;
+
       }
     };
 
