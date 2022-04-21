@@ -1,4 +1,3 @@
-import Timer from './Timer.js';
 
 export default function View() {
   this.form = document.querySelector('.pomodoro__form');
